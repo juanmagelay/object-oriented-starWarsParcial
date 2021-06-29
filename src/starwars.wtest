@@ -104,6 +104,10 @@ test "Obligatorio 1" {
 	assert.equals(triton.valorInicialDeDefensa(), 2)
 	assert.notThat(triton.esCulto())
 	assert.equals(triton.potenciaReal(), 184)
+	
+	var paleas = new Planeta()
+	triton.apaciguar(paleas) 
+	assert.equals(paleas.longitudMurallas(), 6) //3 * 2
 }
 test "Obligatorio 2" {
 	var perla = new Atleta(edad = 28, tecnicas = 4, masaMuscular = 6)

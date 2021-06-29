@@ -39,4 +39,7 @@ class Planeta {
 	method habitantesValiosos() {
 		return self.habitantes().filter( { h => h.valor() >= 40 } )
 	}
+	method apaciguar(otroPlaneta) {
+		self.habitantes().forEach( { h => h.ofrecerTributo(otroPlaneta) } )
+	}
 }
