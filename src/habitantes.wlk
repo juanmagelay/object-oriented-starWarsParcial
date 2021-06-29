@@ -59,3 +59,11 @@ class Docente inherits Persona {
 		return super() + 5
 	}
 }
+
+class Soldado inherits Persona {
+	const property armas = []
+	
+	override method potencia() {
+		return super() + self.armas().sum( { a => a.potenciaOtorgada(self) } )
+	}
+}
