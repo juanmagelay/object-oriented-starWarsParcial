@@ -36,4 +36,7 @@ class Planeta {
 	method recibirTributos() {
 		self.habitantes().forEach( { h => h.ofrecerTributo(self) } )
 	}
+	method habitantesValiosos() {
+		return self.habitantes().filter( { h => h.valor() >= 40 } )
+	}
 }

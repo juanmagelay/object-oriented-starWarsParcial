@@ -59,6 +59,7 @@ test "Planeta: valor inicial de defensa, es culto y potencia real, mas sobre pla
 	planeta2.recibirTributos()
 	assert.equals(planeta2.museos(), 6)
 	assert.equals(planeta2.longitudMurallas(), 5)
+	assert.equals(planeta2.habitantesValiosos(), #{docente4})
 }
 test "Obligatorio 1" {
 	var julieta = new Persona(edad = 42)
