@@ -12,6 +12,7 @@ class Persona {
 	method esDestacada() {
 		return edadesDestacadas.edades().any( { e => e == self.edad() } )
 	}
+	method ofrecerTributo(unPlaneta) {}
 }
 
 object edadesDestacadas {
@@ -34,6 +35,9 @@ class Atleta inherits Persona {
 	method aprenderTecnica() {
 		tecnicas = tecnicas + 1
 	}
+	override method ofrecerTributo(unPlaneta) {
+		unPlaneta.construirMurallas(2)
+	}
 }
 
 class Docente inherits Persona {
@@ -44,5 +48,8 @@ class Docente inherits Persona {
 	}
 	override method esDestacada() {
 		return self.cursos() > 3
+	}
+	override method ofrecerTributo(unPlaneta) {
+		unPlaneta.fundarMuseo()
 	}
 }
