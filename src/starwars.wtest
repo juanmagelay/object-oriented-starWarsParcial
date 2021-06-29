@@ -1,3 +1,105 @@
 import habitantes.*
 import planeta.*
 
+test "Persona generica: edades destacadas" {
+	var persona1 = new Persona(edad = 35)
+	assert.that(persona1.esDestacada())
+}
+test "Atleta: potencia de un atleta" {
+	var atleta1 = new Atleta()
+	assert.equals(atleta1.potencia(), 28) //20 + (2*4)	
+}
+test "Atleta: es atleta destacado" {
+	var atleta2 = new Atleta(tecnicas = 6, edad = 15)
+	assert.that(atleta2.esDestacada())	
+}
+test "Atleta: masa muscular del atleta que entrena y aprende" {
+	var atleta3 = new Atleta()
+	atleta3.entrenar(20)
+	assert.equals(atleta3.masaMuscular(), 8) //4 + (20 / 5)
+	atleta3.aprenderTecnica()
+	assert.equals(atleta3.tecnicas(), 3)
+}
+test "Docente: inteligencia y no es destacado a pesar de edad" {
+	var docente1 = new Docente(cursos = 2, edad = 25)
+	assert.equals(docente1.inteligencia(), 16)//12 + 2 * 2
+	assert.notThat(docente1.esDestacada())
+}
+test "Planeta: delegacion diplomatica" {
+	var persona1 = new Persona(edad = 35)
+	var atleta2 = new Atleta(tecnicas = 6, edad = 15)
+	var docente1 = new Docente(cursos = 2, edad = 25)
+	var planeta1 = new Planeta()
+	planeta1.habitantes().add(persona1)
+	planeta1.habitantes().add(atleta2)
+	planeta1.habitantes().add(docente1)
+	assert.equals(planeta1.delegacionDiplomatica(), #{persona1, atleta2})
+}
+test "Planeta: valor inicial de defensa, es culto y potencia real" {
+	var persona2 = new Persona(potencia = 20, edad = 21)
+	var persona3 = new Persona(potencia = 30, edad = 21)
+	var persona4 = new Persona(potencia = 31, edad = 21)
+	var planeta2 = new Planeta(museos = 4)
+	planeta2.habitantes().add(persona2)
+	planeta2.habitantes().add(persona3)
+	planeta2.habitantes().add(persona4)
+	assert.equals(planeta2.valorInicialDeDefensa(), 2)
+	assert.that(planeta2.esCulto())
+	assert.equals(planeta2.potenciaReal(), 81)
+}
+test "Obligatorio 1" {
+	var julieta = new Persona(edad = 42)
+	var ana = new Atleta(edad = 25)
+	var rosa = new Atleta(edad = 45, tecnicas = 8)
+	var perla = new Atleta(edad = 28, tecnicas = 4, masaMuscular = 6)
+	var monica = new Docente(edad = 45, cursos = 6)
+	var luisa = new Docente(edad = 35, cursos = 1)
+	
+	assert.equals(julieta.potencia(), 20)
+	assert.equals(julieta.inteligencia(), 8)
+	assert.notThat(julieta.esDestacada())
+	
+	assert.equals(ana.potencia(), 28)
+	assert.equals(ana.inteligencia(), 12)
+	assert.that(ana.esDestacada())
+	
+	assert.equals(rosa.potencia(), 52)
+	assert.equals(rosa.inteligencia(), 8)
+	assert.that(rosa.esDestacada())
+	
+	assert.equals(perla.potencia(), 44)
+	assert.equals(perla.inteligencia(), 12)
+	assert.notThat(perla.esDestacada())
+	
+	assert.equals(monica.potencia(), 20)
+	assert.equals(monica.inteligencia(), 20)
+	assert.that(monica.esDestacada())
+	
+	assert.equals(luisa.potencia(), 20)
+	assert.equals(luisa.inteligencia(), 14)
+	assert.notThat(luisa.esDestacada())
+	
+	var triton = new Planeta()
+	triton.habitantes().add(julieta)
+	triton.habitantes().add(ana)
+	triton.habitantes().add(rosa)
+	triton.habitantes().add(perla)
+	triton.habitantes().add(monica)
+	triton.habitantes().add(luisa)
+	assert.equals(triton.delegacionDiplomatica(), #{ana, rosa, monica})
+	assert.equals(triton.valorInicialDeDefensa(), 2)
+	assert.notThat(triton.esCulto())
+	assert.equals(triton.potenciaReal(), 184)
+}
+test "Obligatorio 2" {
+	var perla = new Atleta(edad = 28, tecnicas = 4, masaMuscular = 6)
+	perla.entrenar(15)	
+	perla.aprenderTecnica()
+	assert.equals(perla.potencia(), 65)
+	assert.notThat(perla.esDestacada())
+	perla.aprenderTecnica()
+	assert.that(perla.esDestacada())
+}
+
+
+
